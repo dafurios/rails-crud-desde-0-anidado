@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+
+
+<%= form_with(model: [ @category, @product ], local: true) do |form| %>
+
+<div class="field">
+  <%= form.label :product %>
+  <%= form.text_field :name, id: :product_name %>
+</div>
+
+
+<div class="field">
+  <%= form.label :price %>
+  <%= form.text_field :price, id: :product_price %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+ <% @products.each do |product| %>
+  <tr>
+    <td> <%= product.name %> </td>
+    <td> <%= product.price %> </td>
+    <td> <%= link_to 'Borrar Registro', category_product_path(@category, product), method: :delete %> </td>
+  </tr>
+  <% end  %>
+</table>
+
+<% end  %>
+
+
+<%= link_to 'Volver', root_path %>
